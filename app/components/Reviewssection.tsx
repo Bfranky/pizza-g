@@ -13,8 +13,8 @@ const REVIEWS = [
     name: 'Adaeze N.',
     rating: 4,
     comment:
-      "The ambiance is great and the food comes out hot. I love the Chapman here, it's the best in Obosi. Staff are very friendly and welcoming.",
-    date: '1 month ago',
+// NEW - double quotes
+"The ambiance is great and the food comes out hot. I love the Chapman here, it's the best in Obosi. Staff are very friendly and welcoming.",    date: '1 month ago',
     avatar: 'A',
   },
   {
