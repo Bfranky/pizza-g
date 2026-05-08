@@ -13,7 +13,7 @@ const REVIEWS = [
     name: 'Adaeze N.',
     rating: 4,
     comment:
-      'The ambiance is great and the food comes out hot. I love the Chapman here, it's the best in Obosi. Staff are very friendly and welcoming.',
+      "The ambiance is great and the food comes out hot. I love the Chapman here, it's the best in Obosi. Staff are very friendly and welcoming.",
     date: '1 month ago',
     avatar: 'A',
   },
@@ -22,7 +22,7 @@ const REVIEWS = [
     name: 'Ikenna M.',
     rating: 4,
     comment:
-      'Solid pizza place. The Meat Lover\'s pizza is filling and delicious. Delivery was a bit slow but the food quality made up for it.',
+      "Solid pizza place. The Meat Lover's pizza is filling and delicious. Delivery was a bit slow but the food quality made up for it.",
     date: '3 weeks ago',
     avatar: 'I',
   },
