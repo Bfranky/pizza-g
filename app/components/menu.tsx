@@ -1,4 +1,6 @@
+'use client';
 import type { Metadata } from 'next';
+
 import MenuPageClient from '@/app/components/Menupageclient';
 
 export const metadata: Metadata = {

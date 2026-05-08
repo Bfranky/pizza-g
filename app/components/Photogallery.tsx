@@ -1,3 +1,4 @@
+'use client';
 export default function PhotoGallery() {
   const photos = [
     { emoji: '🍕', label: 'Margherita Suprema', bg: 'linear-gradient(135deg, #8B1A1A, #2C2C2C)' },
