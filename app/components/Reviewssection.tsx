@@ -1,3 +1,5 @@
+'use client';
+
 const REVIEWS = [
   {
     id: 1,
