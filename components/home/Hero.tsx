@@ -1,4 +1,3 @@
-// components/home/Hero.tsx
 import Link from "next/link";
 import { FiMapPin, FiClock, FiPhone } from "react-icons/fi";
 import { RESTAURANT_INFO } from "@/lib/utils";
@@ -6,70 +5,114 @@ import { RESTAURANT_INFO } from "@/lib/utils";
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
+      {/* Hero background - real pizza/Italian restaurant photo */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1920&q=85&fit=crop')",
+        }}
       />
-      {/* Overlay */}
+      {/* Dark cinematic overlay */}
       <div className="hero-gradient absolute inset-0" />
 
+      {/* Subtle vignette */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 40%, rgba(26,22,20,0.6) 100%)",
+        }}
+      />
+
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-brand-red/20 border border-brand-red/40 text-brand-red-light text-sm font-semibold px-4 py-2 rounded-full mb-6 animate-fade-in">
-          <span>🍕</span>
-          <span>Obosi's Favourite Pizza Spot</span>
+      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        {/* Italian ornament top */}
+        <div className="flex items-center justify-center gap-4 mb-8 animate-fade-in">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[var(--brand-gold)]" />
+          <span
+            className="text-[var(--brand-gold)] text-xs tracking-[0.35em] uppercase font-semibold"
+            style={{ fontFamily: "var(--font-lato)" }}
+          >
+            Ristorante &amp; Bar · Obosi, Anambra
+          </span>
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[var(--brand-gold)]" />
         </div>
 
-        <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight animate-fade-in">
-          Pizza <span className="text-brand-red-light">Garden</span>
+        {/* Main heading */}
+        <h1
+          className="font-display text-6xl sm:text-8xl lg:text-9xl font-bold text-white leading-none mb-2 animate-fade-in animate-delay-1"
+          style={{ letterSpacing: "-0.02em" }}
+        >
+          Pizza
         </h1>
+        <h2
+          className="font-display text-5xl sm:text-7xl lg:text-8xl font-bold leading-none mb-6 animate-fade-in animate-delay-2"
+          style={{
+            color: "var(--brand-gold-light)",
+            letterSpacing: "0.05em",
+            fontStyle: "italic",
+          }}
+        >
+          Garden
+        </h2>
 
-        <p className="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-8 leading-relaxed animate-fade-in">
-          Handcrafted pizzas, ice-cold drinks, and warm Nigerian hospitality — all under one roof in the heart of Obosi.
+        {/* Tagline */}
+        <p
+          className="text-white/80 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed animate-fade-in animate-delay-2"
+          style={{ fontFamily: "var(--font-lato)", fontWeight: 300, letterSpacing: "0.03em" }}
+        >
+          Authentic wood-fired pizza, craft cocktails &amp; warm Nigerian
+          hospitality — right in the heart of Obosi, Anambra.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-14 animate-fade-in animate-delay-3">
           <Link
             href="/order"
-            className="bg-brand-red hover:bg-brand-red-dark text-white font-bold px-8 py-4 rounded-full text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-brand-red/30"
+            className="btn-gold px-10 py-4 rounded-none inline-block"
           >
-            Order Now 🛒
+            Reserve Your Table
           </Link>
           <Link
             href="/menu"
-            className="border-2 border-white/40 hover:border-white text-white font-bold px-8 py-4 rounded-full text-lg transition-all duration-300 hover:bg-white/10 backdrop-blur-sm"
+            className="btn-outline-cream px-10 py-4 rounded-none inline-block"
           >
-            View Menu
+            Explore Menu
           </Link>
         </div>
 
-        {/* Info pills */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center animate-fade-in">
-          <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/10 text-white text-sm px-4 py-2 rounded-full">
-            <FiMapPin size={14} className="text-brand-red-light" />
-            <span>Iruka Street, Obosi, Anambra</span>
-          </div>
-          <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/10 text-white text-sm px-4 py-2 rounded-full">
-            <FiClock size={14} className="text-brand-red-light" />
-            <span>Open until 8:00 PM</span>
-          </div>
-          <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/10 text-white text-sm px-4 py-2 rounded-full">
-            <FiPhone size={14} className="text-brand-red-light" />
-            <a href={`tel:${RESTAURANT_INFO.phone}`} className="hover:text-brand-red-light transition-colors">
-              {RESTAURANT_INFO.phone}
-            </a>
-          </div>
+        {/* Info row */}
+        <div
+          className="flex flex-col sm:flex-row gap-6 justify-center text-white/60 text-xs tracking-wider uppercase animate-fade-in animate-delay-4"
+          style={{ fontFamily: "var(--font-lato)" }}
+        >
+          <span className="flex items-center gap-2">
+            <FiMapPin size={12} className="text-[var(--brand-gold)]" />
+            1 Iruka Street, Obosi
+          </span>
+          <span className="hidden sm:block text-white/20">|</span>
+          <span className="flex items-center gap-2">
+            <FiClock size={12} className="text-[var(--brand-gold)]" />
+            Open · Closes 8:00 PM
+          </span>
+          <span className="hidden sm:block text-white/20">|</span>
+          <a
+            href={`tel:${RESTAURANT_INFO.phone}`}
+            className="flex items-center gap-2 hover:text-white transition-colors"
+          >
+            <FiPhone size={12} className="text-[var(--brand-gold)]" />
+            {RESTAURANT_INFO.phone}
+          </a>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center pt-2">
-          <div className="w-1 h-3 bg-white/60 rounded-full animate-pulse" />
-        </div>
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span className="text-white/30 text-[10px] tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-lato)" }}>
+          Scroll
+        </span>
+        <div className="w-px h-12 bg-gradient-to-b from-[var(--brand-gold)] to-transparent animate-pulse" />
       </div>
     </section>
   );

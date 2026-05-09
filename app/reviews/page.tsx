@@ -25,7 +25,9 @@ async function getReviews() {
 
 export default async function ReviewsPage() {
   const [session, reviews] = await Promise.all([getServerSession(authOptions), getReviews()]);
-  const avg = reviews.length ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length : 3.8;
+  const avg = reviews.length ? reviews.reduce((s: number, r: any) => s + r.rating, 0) / reviews.length : 3.8;
 
   return <ReviewsClient reviews={reviews} avgRating={avg} isLoggedIn={!!session} />;
 }
+
+export const dynamic = 'force-dynamic';

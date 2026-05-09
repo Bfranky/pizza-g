@@ -1,4 +1,3 @@
-// components/layout/Navbar.tsx
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -20,74 +19,130 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
-  const cartCount = useCartStore((s) => s.items.reduce((sum, i) => sum + i.quantity, 0));
+  const cartCount = useCartStore((s) =>
+    s.items.reduce((sum, i) => sum + i.quantity, 0)
+  );
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-brand-charcoal shadow-lg" : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      style={{
+        background: scrolled
+          ? "var(--brand-charcoal)"
+          : "transparent",
+        borderBottom: scrolled
+          ? "1px solid rgba(201,168,76,0.15)"
+          : "1px solid transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+      }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl font-display font-bold text-white group-hover:text-brand-red-light transition-colors">
-              🍕 Pizza Garden
-            </span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div
+              className="w-9 h-9 flex items-center justify-center"
+              style={{ background: "var(--brand-gold)" }}
+            >
+              <span className="text-[var(--brand-charcoal)] font-display font-bold text-sm">PG</span>
+            </div>
+            <div>
+              <div
+                className="font-display text-lg font-bold text-white leading-none tracking-wide"
+              >
+                Pizza Garden
+              </div>
+              <div
+                className="text-[var(--brand-gold)] text-[9px] tracking-[0.25em] uppercase"
+                style={{ fontFamily: "var(--font-lato)" }}
+              >
+                Restaurant &amp; Bar
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-body font-semibold tracking-wide transition-colors ${
-                  pathname === link.href
-                    ? "text-brand-red-light border-b-2 border-brand-red-light pb-0.5"
-                    : "text-gray-300 hover:text-white"
-                }`}
+                className="relative group"
+                style={{ fontFamily: "var(--font-lato)" }}
               >
-                {link.label}
+                <span
+                  className="text-xs tracking-widest uppercase font-semibold transition-colors duration-200"
+                  style={{
+                    color:
+                      pathname === link.href
+                        ? "var(--brand-gold)"
+                        : "rgba(255,255,255,0.7)",
+                  }}
+                >
+                  {link.label}
+                </span>
+                {/* Underline */}
+                <div
+                  className="absolute -bottom-1 left-0 h-px transition-all duration-300"
+                  style={{
+                    background: "var(--brand-gold)",
+                    width: pathname === link.href ? "100%" : "0%",
+                  }}
+                />
+                <div
+                  className="absolute -bottom-1 left-0 h-px w-0 group-hover:w-full transition-all duration-300"
+                  style={{ background: "rgba(201,168,76,0.5)" }}
+                />
               </Link>
             ))}
           </div>
 
           {/* Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-4">
             <Link
               href="/order"
-              className="relative p-2 text-gray-300 hover:text-white transition-colors"
+              className="relative p-2 text-white/60 hover:text-[var(--brand-gold)] transition-colors"
               aria-label="Cart"
             >
-              <FiShoppingCart size={20} />
+              <FiShoppingCart size={18} />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-brand-red text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                <span
+                  className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center"
+                  style={{
+                    background: "var(--brand-gold)",
+                    color: "var(--brand-charcoal)",
+                  }}
+                >
                   {cartCount}
                 </span>
               )}
             </Link>
 
             {session ? (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 {(session.user as any).role === "ADMIN" && (
                   <Link
                     href="/admin"
-                    className="text-xs bg-brand-red text-white px-3 py-1.5 rounded-full font-semibold hover:bg-brand-red-dark transition-colors"
+                    className="text-[10px] tracking-widest uppercase font-bold px-3 py-1.5 border transition-colors"
+                    style={{
+                      borderColor: "var(--brand-gold)",
+                      color: "var(--brand-gold)",
+                      fontFamily: "var(--font-lato)",
+                    }}
                   >
                     Admin
                   </Link>
                 )}
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
-                  className="text-sm text-gray-300 hover:text-white transition-colors font-semibold"
+                  className="text-xs text-white/50 hover:text-white transition-colors uppercase tracking-widest"
+                  style={{ fontFamily: "var(--font-lato)" }}
                 >
                   Sign Out
                 </button>
@@ -95,17 +150,13 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 text-sm text-gray-300 hover:text-white transition-colors font-semibold"
+                className="text-white/50 hover:text-white transition-colors"
               >
                 <FiUser size={16} />
-                Sign In
               </Link>
             )}
 
-            <Link
-              href="/order"
-              className="bg-brand-red hover:bg-brand-red-dark text-white text-sm font-bold px-4 py-2 rounded-full transition-colors"
-            >
+            <Link href="/order" className="btn-gold px-5 py-2.5">
               Order Now
             </Link>
           </div>
@@ -116,23 +167,35 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
-            {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            {isOpen ? <FiX size={22} /> : <FiMenu size={22} />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden bg-brand-charcoal border-t border-gray-700">
-          <div className="px-4 py-4 flex flex-col gap-3">
+        <div
+          className="md:hidden border-t"
+          style={{
+            background: "var(--brand-charcoal)",
+            borderColor: "rgba(201,168,76,0.2)",
+          }}
+        >
+          <div className="px-6 py-6 flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`text-sm font-semibold py-2 border-b border-gray-700 transition-colors ${
-                  pathname === link.href ? "text-brand-red-light" : "text-gray-300 hover:text-white"
-                }`}
+                className="text-xs font-semibold py-2 border-b tracking-widest uppercase transition-colors"
+                style={{
+                  borderColor: "rgba(255,255,255,0.06)",
+                  color:
+                    pathname === link.href
+                      ? "var(--brand-gold)"
+                      : "rgba(255,255,255,0.7)",
+                  fontFamily: "var(--font-lato)",
+                }}
               >
                 {link.label}
               </Link>
@@ -141,22 +204,15 @@ export default function Navbar() {
               <Link
                 href="/order"
                 onClick={() => setIsOpen(false)}
-                className="flex-1 bg-brand-red text-white text-center text-sm font-bold py-2 rounded-full hover:bg-brand-red-dark transition-colors"
+                className="flex-1 btn-gold py-3 text-center"
               >
                 Order Now
               </Link>
-              {session ? (
-                <button
-                  onClick={() => { signOut({ callbackUrl: "/" }); setIsOpen(false); }}
-                  className="flex-1 border border-gray-600 text-gray-300 text-sm font-semibold py-2 rounded-full hover:bg-gray-700 transition-colors"
-                >
-                  Sign Out
-                </button>
-              ) : (
+              {!session && (
                 <Link
                   href="/login"
                   onClick={() => setIsOpen(false)}
-                  className="flex-1 border border-gray-600 text-gray-300 text-center text-sm font-semibold py-2 rounded-full hover:bg-gray-700 transition-colors"
+                  className="flex-1 btn-outline-cream py-3 text-center"
                 >
                   Sign In
                 </Link>

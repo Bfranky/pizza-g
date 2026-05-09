@@ -2,8 +2,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const { reference } = await req.json();
 
     // Verify with Paystack
@@ -21,7 +22,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 
     // Update order status
     const order = await prisma.order.update({
-      where: { id: params.id },
+      where: { id },
       data: { status: "PREPARING", reference },
     });
 

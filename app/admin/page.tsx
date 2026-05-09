@@ -92,7 +92,7 @@ export default async function AdminDashboard() {
               {stats.recentOrders.length === 0 ? (
                 <tr><td colSpan={6} className="px-6 py-8 text-center text-gray-400 text-sm">No orders yet</td></tr>
               ) : (
-                stats.recentOrders.map((order) => (
+                stats.recentOrders.map((order: any) => (
                   <tr key={order.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 text-xs font-mono text-gray-500">#{order.id.slice(-6).toUpperCase()}</td>
                     <td className="px-6 py-4 text-sm font-medium text-brand-charcoal">
@@ -120,3 +120,5 @@ export default async function AdminDashboard() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

@@ -1,6 +1,4 @@
-// app/layout.tsx
 import type { Metadata } from "next";
-import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/layout/Navbar";
@@ -8,53 +6,27 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import AuthProvider from "@/components/layout/AuthProvider";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-const lato = Lato({
-  subsets: ["latin"],
-  weight: ["300", "400", "700", "900"],
-  variable: "--font-lato",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: {
-    default: "Pizza Garden | Best Pizza in Obosi, Anambra Nigeria",
+    default: "Pizza Garden | Fine Pizza & Bar - Obosi, Anambra",
     template: "%s | Pizza Garden",
   },
-  description:
-    "Pizza Garden — Obosi's favorite pizza restaurant and bar. Dine-in, takeaway, and delivery. Located at 1 Iruka Street, Obosi, Anambra, Nigeria. Order online today!",
-  keywords: [
-    "pizza Obosi",
-    "pizza Anambra Nigeria",
-    "Pizza Garden Obosi",
-    "restaurant Obosi",
-    "bar Obosi",
-    "pizza delivery Anambra",
-    "best pizza Nigeria",
-    "Iruka Street Obosi",
-  ],
+  description: "Pizza Garden — Obosi's premier pizza restaurant and bar. Authentic wood-fired pizzas, craft cocktails and warm hospitality at 1 Iruka Street, Obosi, Anambra, Nigeria.",
+  keywords: ["pizza Obosi","pizza Anambra Nigeria","Pizza Garden Obosi","restaurant Obosi","bar Obosi","pizza delivery Anambra","best pizza Nigeria"],
   openGraph: {
-    type: "website",
-    locale: "en_NG",
-    url: "https://pizzagarden.ng",
+    type: "website", locale: "en_NG", url: "https://pizzagarden.ng",
     siteName: "Pizza Garden",
-    title: "Pizza Garden | Best Pizza in Obosi, Anambra Nigeria",
-    description: "Obosi's favorite pizza restaurant and bar. Dine-in, takeaway, and delivery.",
+    title: "Pizza Garden | Fine Pizza & Bar - Obosi, Anambra",
+    description: "Obosi's premier pizza restaurant and bar.",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Pizza Garden" }],
   },
-  twitter: { card: "summary_large_image", title: "Pizza Garden Obosi", description: "Obosi's favorite pizza restaurant and bar." },
   robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${lato.variable}`}>
-      <body className="bg-brand-cream font-body text-brand-charcoal antialiased">
+    <html lang="en">
+      <body>
         <AuthProvider>
           <Navbar />
           <main className="min-h-screen">{children}</main>
@@ -64,8 +36,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             position="top-right"
             toastOptions={{
               duration: 4000,
-              style: { background: "#2C2C2C", color: "#FFF8F0", fontFamily: "var(--font-lato)" },
-              success: { iconTheme: { primary: "#C0392B", secondary: "#FFF8F0" } },
+              style: { background: "#1A1614", color: "#FAF6F0", fontFamily: "'Jost', sans-serif", fontSize: "14px", border: "1px solid rgba(200,150,62,0.3)" },
+              success: { iconTheme: { primary: "#C8963E", secondary: "#1A1614" } },
             }}
           />
         </AuthProvider>

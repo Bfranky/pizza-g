@@ -12,5 +12,7 @@ async function getMenuItems() {
 
 export default async function AdminMenuPage() {
   const items = await getMenuItems();
-  return <AdminMenuClient items={items} />;
+  return <AdminMenuClient items={items as any} />;
 }
+
+export const dynamic = 'force-dynamic';

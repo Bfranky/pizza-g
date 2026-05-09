@@ -21,5 +21,7 @@ async function getMenuItems() {
 
 export default async function MenuPage() {
   const items = await getMenuItems();
-  return <MenuClient items={items} />;
+  return <MenuClient items={items as any} />;
 }
+
+export const dynamic = 'force-dynamic';

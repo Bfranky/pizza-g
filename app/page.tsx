@@ -1,4 +1,3 @@
-// app/page.tsx
 import type { Metadata } from "next";
 import Hero from "@/components/home/Hero";
 import FeaturedMenu from "@/components/home/FeaturedMenu";
@@ -23,3 +22,4 @@ export default function HomePage() {
     </>
   );
 }
+export const dynamic = 'force-dynamic';
