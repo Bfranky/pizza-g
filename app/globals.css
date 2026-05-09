@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@source "../app";
-@source "../components";
 
 :root {
   --brand-red: #8B1A1A;
