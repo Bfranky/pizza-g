@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-dark: var(--brand-red-dark);
+  --color-brand-red-light: var(--brand-red-light);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-light: var(--brand-gold-light);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-warm: var(--brand-warm);
+  --color-brand-charcoal: var(--brand-charcoal);
+  --color-brand-charcoal-light: var(--brand-charcoal-light);
+  --color-brand-stone: var(--brand-stone);
+  --color-brand-linen: var(--brand-linen);
+}
+
 :root {
   --brand-red: #8B1A1A;
   --brand-red-dark: #5C1010;
@@ -150,30 +164,35 @@ body {
 .btn-gold {
   background: linear-gradient(135deg, var(--brand-gold), var(--brand-gold-light), var(--brand-gold));
   color: var(--brand-charcoal);
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--brand-gold-light);
+  border-radius: 9999px; /* Fully rounded */
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.25);
 }
 .btn-gold:hover {
   background: linear-gradient(135deg, var(--brand-gold-light), var(--brand-gold), var(--brand-gold-light));
-  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(201, 168, 76, 0.4);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .btn-outline-cream {
-  border: 1.5px solid rgba(255,255,255,0.6);
+  border: 2px solid rgba(255,255,255,0.8);
   color: white;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   transition: all 0.3s ease;
   backdrop-filter: blur(4px);
+  border-radius: 9999px; /* Fully rounded */
 }
 .btn-outline-cream:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: white;
+  background: white;
+  color: var(--brand-charcoal);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
