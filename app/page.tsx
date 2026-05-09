@@ -1,24 +1,25 @@
-import type { Metadata } from 'next';
-import HeroSection from '@/app/components/herosection';
-import FeaturedMenu from '@/app/components/Featuredmenu';
-import AboutSnippet from '@/app/components/sections/Aboutsnippet';
-import PhotoGallery from '@/app/components/Photogallery';
-import ReviewsSection from '@/app/components/Reviewssection';
-import OpeningHoursBanner from '@/app/components/Openinghoursbanner';
+// app/page.tsx
+import type { Metadata } from "next";
+import Hero from "@/components/home/Hero";
+import FeaturedMenu from "@/components/home/FeaturedMenu";
+import HowItWorks from "@/components/home/HowItWorks";
+import ReviewsPreview from "@/components/home/ReviewsPreview";
+import Gallery from "@/components/home/Gallery";
+import OpenStatus from "@/components/home/OpenStatus";
 
 export const metadata: Metadata = {
-  title: 'Pizza Garden — Best Pizza in Obosi, Anambra Nigeria',
+  title: "Pizza Garden | Best Pizza in Obosi, Anambra Nigeria",
 };
 
 export default function HomePage() {
   return (
     <>
-      <HeroSection />
-      <OpeningHoursBanner />
+      <Hero />
+      <OpenStatus />
       <FeaturedMenu />
-      <AboutSnippet />
-      <PhotoGallery />
-      <ReviewsSection />
+      <HowItWorks />
+      <Gallery />
+      <ReviewsPreview />
     </>
   );
 }

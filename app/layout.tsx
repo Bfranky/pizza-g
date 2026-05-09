@@ -1,90 +1,74 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import Navbar from '@/app/components/layout/navbar';
-import Footer from '@/app/components/layout/footer'
-import WhatsAppButton from '@/app/components/Whatsappbutton';
-import ToastProvider from '@/app/components/Toastprovider';
+// app/layout.tsx
+import type { Metadata } from "next";
+import { Playfair_Display, Lato } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import AuthProvider from "@/components/layout/AuthProvider";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  variable: "--font-lato",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
-    default: 'Pizza Garden — Best Pizza in Obosi, Anambra Nigeria',
-    template: '%s | Pizza Garden Obosi',
+    default: "Pizza Garden | Best Pizza in Obosi, Anambra Nigeria",
+    template: "%s | Pizza Garden",
   },
   description:
-    'Pizza Garden is a premier pizza restaurant and bar located at 1 Iruka Street, Obosi, Anambra State, Nigeria. Order fresh pizzas, drinks, and bar items online for dine-in, takeaway, or delivery.',
+    "Pizza Garden — Obosi's favorite pizza restaurant and bar. Dine-in, takeaway, and delivery. Located at 1 Iruka Street, Obosi, Anambra, Nigeria. Order online today!",
   keywords: [
-    'pizza Obosi',
-    'pizza Anambra Nigeria',
-    'pizza restaurant Obosi',
-    'best pizza Nigeria',
-    'Pizza Garden Obosi',
-    'pizza bar Anambra',
-    'online pizza order Nigeria',
-    'restaurant Obosi',
-    'food delivery Obosi',
+    "pizza Obosi",
+    "pizza Anambra Nigeria",
+    "Pizza Garden Obosi",
+    "restaurant Obosi",
+    "bar Obosi",
+    "pizza delivery Anambra",
+    "best pizza Nigeria",
+    "Iruka Street Obosi",
   ],
-  authors: [{ name: 'Pizza Garden' }],
-  creator: 'Pizza Garden',
   openGraph: {
-    type: 'website',
-    locale: 'en_NG',
-    url: 'https://pizzagarden.ng',
-    siteName: 'Pizza Garden',
-    title: 'Pizza Garden — Best Pizza in Obosi, Anambra Nigeria',
-    description:
-      'Fresh pizzas, drinks, and bar items. Dine-in, takeaway, or delivery. Open daily until 8PM at 1 Iruka Street, Obosi, Anambra.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Pizza Garden Restaurant — Obosi Anambra',
-      },
-    ],
+    type: "website",
+    locale: "en_NG",
+    url: "https://pizzagarden.ng",
+    siteName: "Pizza Garden",
+    title: "Pizza Garden | Best Pizza in Obosi, Anambra Nigeria",
+    description: "Obosi's favorite pizza restaurant and bar. Dine-in, takeaway, and delivery.",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Pizza Garden" }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Pizza Garden — Best Pizza in Obosi, Anambra',
-    description: 'Fresh pizza, bar & more at 1 Iruka Street, Obosi. Order online!',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
-  metadataBase: new URL('https://pizzagarden.ng'),
+  twitter: { card: "summary_large_image", title: "Pizza Garden Obosi", description: "Obosi's favorite pizza restaurant and bar." },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="bg-cream">
-        <ToastProvider>
+    <html lang="en" className={`${playfair.variable} ${lato.variable}`}>
+      <body className="bg-brand-cream font-body text-brand-charcoal antialiased">
+        <AuthProvider>
           <Navbar />
-          <main>{children}</main>
+          <main className="min-h-screen">{children}</main>
           <Footer />
           <WhatsAppButton />
-        </ToastProvider>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: { background: "#2C2C2C", color: "#FFF8F0", fontFamily: "var(--font-lato)" },
+              success: { iconTheme: { primary: "#C0392B", secondary: "#FFF8F0" } },
+            }}
+          />
+        </AuthProvider>
       </body>
     </html>
   );
