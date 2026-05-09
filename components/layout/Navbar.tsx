@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { FiMenu, FiX, FiShoppingCart, FiUser } from "react-icons/fi";
+import { FiMenu, FiX, FiShoppingCart } from "react-icons/fi";
 import { useCartStore } from "@/store/cartStore";
 
 const navLinks = [
@@ -17,7 +16,6 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { data: session } = useSession();
   const pathname = usePathname();
   const cartCount = useCartStore((s) =>
     s.items.reduce((sum, i) => sum + i.quantity, 0)
@@ -124,39 +122,7 @@ export default function Navbar() {
               )}
             </Link>
 
-            {session ? (
-              <div className="flex items-center gap-3">
-                {(session.user as any).role === "ADMIN" && (
-                  <Link
-                    href="/admin"
-                    className="text-[10px] tracking-widest uppercase font-bold px-3 py-1.5 border transition-colors"
-                    style={{
-                      borderColor: "var(--brand-gold)",
-                      color: "var(--brand-gold)",
-                      fontFamily: "var(--font-lato)",
-                    }}
-                  >
-                    Admin
-                  </Link>
-                )}
-                <button
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  className="text-xs text-white/50 hover:text-white transition-colors uppercase tracking-widest"
-                  style={{ fontFamily: "var(--font-lato)" }}
-                >
-                  Sign Out
-                </button>
-              </div>
-            ) : (
-              <Link
-                href="/login"
-                className="text-white/50 hover:text-white transition-colors"
-              >
-                <FiUser size={16} />
-              </Link>
-            )}
-
-            <Link href="/order" className="btn-gold px-5 py-2.5">
+            <Link href="/order" className="btn-gold px-5 py-2.5 ml-2">
               Order Now
             </Link>
           </div>
@@ -200,23 +166,14 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <div className="flex gap-3 pt-2">
+            <div className="flex pt-2">
               <Link
                 href="/order"
                 onClick={() => setIsOpen(false)}
-                className="flex-1 btn-gold py-3 text-center"
+                className="w-full btn-gold py-3 text-center"
               >
                 Order Now
               </Link>
-              {!session && (
-                <Link
-                  href="/login"
-                  onClick={() => setIsOpen(false)}
-                  className="flex-1 btn-outline-cream py-3 text-center"
-                >
-                  Sign In
-                </Link>
-              )}
             </div>
           </div>
         </div>
