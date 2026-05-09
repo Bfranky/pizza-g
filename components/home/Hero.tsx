@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { FiMapPin, FiClock, FiPhone } from "react-icons/fi";
 import { RESTAURANT_INFO } from "@/lib/utils";
